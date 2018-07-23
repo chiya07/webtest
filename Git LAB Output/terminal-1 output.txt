@@ -1,0 +1,427 @@
+student05:~/environment $ git
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+student05:~/environment $ git clone 
+fatal: You must specify a repository to clone.
+
+usage: git clone [<options>] [--] <repo> [<dir>]
+
+    -v, --verbose         be more verbose
+    -q, --quiet           be more quiet
+    --progress            force progress reporting
+    -n, --no-checkout     don't create a checkout
+    --bare                create a bare repository
+    --mirror              create a mirror repository (implies bare)
+    -l, --local           to clone from a local repository
+    --no-hardlinks        don't use local hardlinks, always copy
+    -s, --shared          setup as shared repository
+    --recurse-submodules[=<pathspec>]
+                          initialize submodules in the clone
+    -j, --jobs <n>        number of submodules cloned in parallel
+    --template <template-directory>
+                          directory from which templates will be used
+    --reference <repo>    reference repository
+    --reference-if-able <repo>
+                          reference repository
+    --dissociate          use --reference only while cloning
+    -o, --origin <name>   use <name> instead of 'origin' to track upstream
+    -b, --branch <branch>
+                          checkout <branch> instead of the remote's HEAD
+    -u, --upload-pack <path>
+                          path to git-upload-pack on the remote
+    --depth <depth>       create a shallow clone of that depth
+    --shallow-since <time>
+                          create a shallow clone since a specific time
+    --shallow-exclude <revision>
+                          deepen history of shallow clone, excluding rev
+    --single-branch       clone only one branch, HEAD or --branch
+    --no-tags             don't clone any tags, and make later fetches not to follow them
+    --shallow-submodules  any cloned submodules will be shallow
+    --separate-git-dir <gitdir>
+student05:~/environment $ git clone https://github.com/chiya07/webtest.git
+Cloning into 'webtest'...
+warning: You appear to have cloned an empty repository.
+student05:~/environment $ ls -la
+total 20
+drwxr-xr-x 4 ec2-user ec2-user 4096 Jul 23 09:48 .
+drwx------ 8 ec2-user ec2-user 4096 Jul 23 09:46 ..
+drwxr-xr-x 3 ec2-user ec2-user 4096 Jul 23 09:14 .c9
+-rw-r--r-- 1 ec2-user ec2-user  570 Jul 23 09:14 README.md
+drwxrwxr-x 3 ec2-user ec2-user 4096 Jul 23 09:48 webtest
+student05:~/environment $ cd webtest
+student05:~/environment/webtest (master) $ ls -la
+total 12
+drwxrwxr-x 3 ec2-user ec2-user 4096 Jul 23 09:48 .
+drwxr-xr-x 4 ec2-user ec2-user 4096 Jul 23 09:48 ..
+drwxrwxr-x 7 ec2-user ec2-user 4096 Jul 23 09:48 .git
+student05:~/environment/webtest (master) $ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+student05:~/environment/webtest (master) $ git add *
+student05:~/environment/webtest (master) $ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   index.html
+
+student05:~/environment/webtest (master) $ git commit -m "test commit"
+[master (root-commit) 933d67c] test commit
+ Committer: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 9 insertions(+)
+ create mode 100644 index.html
+student05:~/environment/webtest (master) $ git log
+commit 933d67c58f6cafaa2a996f7a67cd17e288bfdf94 (HEAD -> master)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:02:03 2018 +0000
+
+    test commit
+student05:~/environment/webtest (master) $ git diff
+student05:~/environment/webtest (master) $ git diff 933d67c58f6cafaa2a996f7a67cd17e288bfdf94
+student05:~/environment/webtest (master) $ 
+student05:~/environment/webtest (master) $ git diff *
+student05:~/environment/webtest (master) $ git push
+Username for 'https://github.com': chiya07
+Password for 'https://chiya07@github.com': 
+Counting objects: 3, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 329 bytes | 329.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/chiya07/webtest.git
+ * [new branch]      master -> master
+student05:~/environment/webtest (master) $ git branch -v
+student05:~/environment/webtest (master) $ cd ..
+student05:~/environment $ git branch -v
+fatal: Not a git repository (or any of the parent directories): .git
+student05:~/environment $ cd webtest/
+student05:~/environment/webtest (master) $ git branch test
+student05:~/environment/webtest (master) $ git branch
+* master
+  test
+student05:~/environment/webtest (master) $ git branch -v
+* master 933d67c test commit
+  test   933d67c test commit
+student05:~/environment/webtest (master) $ git checkout test
+Switched to branch 'test'
+student05:~/environment/webtest (test) $ git branch -v                                                       
+  master 933d67c test commit
+* test   933d67c test commit
+student05:~/environment/webtest (test) $ git add *
+student05:~/environment/webtest (test) $ git commit
+Aborting commit due to empty commit message.
+student05:~/environment/webtest (test) $ git commit -m "commiting from test branch"
+[test fb8c6bf] commiting from test branch
+ Committer: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+student05:~/environment/webtest (test) $ git log
+commit fb8c6bfddf88763e2ee1df5b0c4b23ef71a99d02 (HEAD -> test)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:33:54 2018 +0000
+
+    commiting from test branch
+
+commit 933d67c58f6cafaa2a996f7a67cd17e288bfdf94 (origin/master, master)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:02:03 2018 +0000
+
+    test commit
+student05:~/environment/webtest (test) $ git branch -v
+  master 933d67c test commit
+* test   fb8c6bf commiting from test branch
+student05:~/environment/webtest (test) $ git branch master
+fatal: A branch named 'master' already exists.
+student05:~/environment/webtest (test) $ git branch -s master
+error: unknown switch `s'
+usage: git branch [<options>] [-r | -a] [--merged | --no-merged]
+   or: git branch [<options>] [-l] [-f] <branch-name> [<start-point>]
+   or: git branch [<options>] [-r] (-d | -D) <branch-name>...
+   or: git branch [<options>] (-m | -M) [<old-branch>] <new-branch>
+   or: git branch [<options>] [-r | -a] [--points-at]
+   or: git branch [<options>] [-r | -a] [--format]
+
+Generic options
+    -v, --verbose         show hash and subject, give twice for upstream branch
+    -q, --quiet           suppress informational messages
+    -t, --track           set up tracking mode (see git-pull(1))
+    --set-upstream        change upstream info
+    -u, --set-upstream-to <upstream>
+                          change the upstream info
+    --unset-upstream      Unset the upstream info
+    --color[=<when>]      use colored output
+    -r, --remotes         act on remote-tracking branches
+    --contains <commit>   print only branches that contain the commit
+    --no-contains <commit>
+                          print only branches that don't contain the commit
+    --abbrev[=<n>]        use <n> digits to display SHA-1s
+
+Specific git-branch actions:
+    -a, --all             list both remote-tracking and local branches
+    -d, --delete          delete fully merged branch
+    -D                    delete branch (even if not merged)
+    -m, --move            move/rename a branch and its reflog
+    -M                    move/rename a branch, even if target exists
+    --list                list branch names
+    -l, --create-reflog   create the branch's reflog
+    --edit-description    edit the description for the branch
+    -f, --force           force creation, move/rename, deletion
+    --merged <commit>     print only branches that are merged
+    --no-merged <commit>  print only branches that are not merged
+    --column[=<style>]    list branches in columns
+    --sort <key>          field name to sort on
+    --points-at <object>  print only branches of the object
+    -i, --ignore-case     sorting and filtering are case insensitive
+    --format <format>     format to use for the output
+
+student05:~/environment/webtest (test) $ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+student05:~/environment/webtest (master) $ git merge test
+Updating 933d67c..fb8c6bf
+Fast-forward
+ index.html | 1 +
+ 1 file changed, 1 insertion(+)
+student05:~/environment/webtest (master) $ git branch -v
+* master fb8c6bf [ahead 1] commiting from test branch
+  test   fb8c6bf commiting from test branch
+student05:~/environment/webtest (master) $  git checkout test
+Switched to branch 'test'
+student05:~/environment/webtest (test) $ git add *
+student05:~/environment/webtest (test) $ git commit -m "committing to test branch"
+[test 33acf15] committing to test branch
+ Committer: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+student05:~/environment/webtest (test) $ git log
+commit 33acf1524244558ed2624a1557226a4d36166ea1 (HEAD -> test)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:43:22 2018 +0000
+
+    committing to test branch
+
+commit fb8c6bfddf88763e2ee1df5b0c4b23ef71a99d02 (master)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:33:54 2018 +0000
+
+    commiting from test branch
+
+commit 933d67c58f6cafaa2a996f7a67cd17e288bfdf94 (origin/master)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:02:03 2018 +0000
+
+    test commit
+student05:~/environment/webtest (test) $ git branch -v
+  master fb8c6bf [ahead 1] commiting from test branch
+* test   33acf15 committing to test branch
+student05:~/environment/webtest (test) $ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+student05:~/environment/webtest (master) $ git add *
+student05:~/environment/webtest (master) $ git commit -m "comitting to master"
+[master fe20272] comitting to master
+ Committer: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+student05:~/environment/webtest (master) $ git merge test
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+student05:~/environment/webtest (master|MERGING) $ git diff
+diff --cc index.html
+index 09a8819,36e475b..0000000
+--- a/index.html
++++ b/index.html
+@@@ -6,6 -6,6 +6,10 @@@
+      <body>
+          <h1>This is Test Web</h1>
+          <h2>This is a branch test</h2>
+++<<<<<<< HEAD
+ +        <h3>This is master branch</h3>
+++=======
++         <h3>Changing test branch</h3>
+++>>>>>>> test
+      </body>
+  </html>
+student05:~/environment/webtest (master|MERGING) $ git branch -v
+* master fe20272 [ahead 2] comitting to master
+  test   33acf15 committing to test branch
+student05:~/environment/webtest (master|MERGING) $ git log
+commit fe20272a9accb0bc82585f905b4b8f9d816bf11f (HEAD -> master)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:44:53 2018 +0000
+
+    comitting to master
+
+commit fb8c6bfddf88763e2ee1df5b0c4b23ef71a99d02
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:33:54 2018 +0000
+
+    commiting from test branch
+
+commit 933d67c58f6cafaa2a996f7a67cd17e288bfdf94 (origin/master)
+Author: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Date:   Mon Jul 23 10:02:03 2018 +0000
+
+    test commit
+student05:~/environment/webtest (master|MERGING) $ git add *
+student05:~/environment/webtest (master|MERGING) $ git commit -m "sample three way merge"
+[master 6cea1b5] sample three way merge
+ Committer: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+student05:~/environment/webtest (master) $ git branch -v
+* master 6cea1b5 [ahead 4] sample three way merge
+  test   33acf15 committing to test branch
+student05:~/environment/webtest (master) $ git remote -v
+origin  https://github.com/chiya07/webtest.git (fetch)
+origin  https://github.com/chiya07/webtest.git (push)
+student05:~/environment/webtest (master) $ git push
+Username for 'https://github.com': chiya07
+Password for 'https://chiya07@github.com': 
+Counting objects: 12, done.
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (12/12), 1.11 KiB | 378.00 KiB/s, done.
+Total 12 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), done.
+To https://github.com/chiya07/webtest.git
+   933d67c..6cea1b5  master -> master
+student05:~/environment/webtest (master) $ git add *
+student05:~/environment/webtest (master) $ git commit -m "This is local master commit"
+[master d72b991] This is local master commit
+ Committer: EC2 Default User <ec2-user@ip-10-0-0-13.ec2.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+student05:~/environment/webtest (master) $ git push
+Username for 'https://github.com': chiya07
+Password for 'https://chiya07@github.com': 
+To https://github.com/chiya07/webtest.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/chiya07/webtest.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+student05:~/environment/webtest (master) $ git pull
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/chiya07/webtest
+   6cea1b5..0348bca  master     -> origin/master
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+student05:~/environment/webtest (master|MERGING) $ 
