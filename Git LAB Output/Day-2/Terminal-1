@@ -1,0 +1,186 @@
+1  git
+    2  git clone 
+    3  git clone https://github.com/chiya07/webtest.git
+    4  ls -la
+    5  cd webtest
+    6  ls -la
+    7  git status
+    8  git add *
+    9  git status
+   10  git commit -m "test commit"
+   11  git log
+   12  git diff
+   13  git diff 933d67c58f6cafaa2a996f7a67cd17e288bfdf94
+   14  git diff *
+   15  git push
+   16  git branch -v
+   17  cd ..
+   18  git branch -v
+   19  cd webtest/
+   20  git branch test
+   21  git branch
+   22  git branch -v
+   23  git checkout test
+   24  git branch -v
+   25  git add *
+   26  git commit
+   27  git commit -m "commiting from test branch"
+   28  git log
+   29  git branch -v
+   30  git branch master
+   31  git branch -s master
+   32  git checkout master
+   33  git merge test
+   34  git branch -v
+   35   git checkout test
+   36  git add *
+   37  git commit -m "committing to test branch"
+   38  git log
+   39  git branch -v
+   40  git checkout master
+   41  git add *
+   42  git commit -m "comitting to master"
+   43  git merge test
+   44  git diff
+   45  git branch -v
+   46  git log
+   47  git add *
+   48  git commit -m "sample three way merge"
+   49  git branch -v
+   50  git remote -v
+   51  git push
+   52  git add *
+   53  git commit -m "This is local master commit"
+   54  git push
+   55  git pull
+   56  cd webtest/
+   57  git add *
+   58  git commit -m "merged local with remote"
+   59  git push
+   60  git pull
+   61  git branch
+   62  history
+   63  g
+   64  git add *
+   65  git commit -m "added lab related files"
+   66  git push
+   67  git pull origin testing
+   68  git branch -v
+   69  git branch -v --all
+   70  git push --set-upstream origin testing
+   71  git push -u testing
+   72  git push -u origin/testing
+   73  history
+   74  git branch --set-upstream origin master:testing
+   75  git push --set-upstream origin master:testing
+   76  cd webtest/
+   77  git push --set-upstream origin master:testing
+   78  git branch --set-upstream origin master:testing
+   79  git pull
+   80  git branch -v
+   81  git branch -v -all
+   82  git branch -v --all
+   83  sudo yum -y install java-1.8.0-openjdk.x86_64
+   84  java -version
+   85  wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   86  sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   87  sudo rpm –import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   88  sudo rpm –import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   89  sudo yu, remove java-1.7.0
+   90  sudo yum remove java-1.7.0
+   91  java -version
+   92  sudo rpm –-import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   93  sudo rpm –-import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   94  sudo rpm --import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   95  sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   96  sudo yum install jenkins
+   97  sudo systemctl start jenkins
+   98  sudo service jenkins start
+   99  sudo chkconfig jenkins on
+  100  cd Git\ LAB\ Output/
+  101  git mv *.txt Day-1/*
+  102  git add Day-1/*
+  103  git mv *.txt Day-1/
+  104  git mv *.txt Day-1
+  105  git mv *.txt Day-1/*
+  106  git mv *.txt Day-1/
+  107  sudo git mv *.txt Day-1/
+  108  cd Day-1/
+  109  touch temp.txt
+  110  cd ..
+  111  git add Day-1
+  112  git mv *.txt Day-1/
+  113  git add *
+  114  git commit -m "adding all files"
+  115  git push
+  116  git branch -v
+  117  git push --set-upstream origin master:master
+  118  git pull
+  119  git push --set-upstream origin master:master
+  120  git pull --set-upstream origin master:master
+  121  git pull --all
+  122  git push --set-upstream origin master:master
+  123  git push --set-upstream origin master:testing
+  124  git pull
+  125  git push --set-upstream origin master:master
+  126  git status
+  127  git push --set-upstream origin master:testing
+  128  git mv *.txt Day-1/
+  129  git add *
+  130  git commit -m "moved day wise"
+  131  git push --set-upstream master:testing
+  132  git push --set-upstream origin master:testing
+  133  git branch --set-upstream origin master:master
+  134  git branch --track origin master:master
+  135  git branch --set-upstream origin master:master
+  136  git fetch master
+  137  git fetch master:master
+  138  git fetch origin master
+  139  git pull origin master:master
+  140  git status
+  141  git add *
+  142  git commit -m "added day-2 labs"
+  143  git pull origin master:master
+  144  git push origin master:master
+  145  git push origin master:testing
+  146  git branch =v
+  147  git branch -v
+  148  git rm branch =v
+  149  git branch rm =v
+  150  git branch -v
+  151  git branch -v --all
+  152  cat /var/lib/jenkins/secrets/initialAdminPassword
+  153  sudo /var/lib/jenkins/secrets/initialAdminPassword.
+  154  sudo /var/lib/jenkins/secrets/initialAdminPassword
+  155  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  156  ps -ef|grep jenkins
+  157  which git
+  158  which bash
+  159  which ssh
+  160  sudo vi /var/lib/jenkins/config.xml 
+  161  lsa
+  162  ls
+  163  cd ..
+  164  ssh -i "s2-myKey.pem" ec2-user@ec2-18-204-37-110.compute-1.amazonaws.com
+  165  git add *
+  166  git commit -m "this is jenkins test"
+  167  git pull origin master:testing
+  168  git push origin master:testing
+  169  git pull origin master:testing
+  170  git fetch origin master:testing
+  171  git pull origin testing
+  172  git status
+  173  git push origin master:testing
+  174  git add *
+  175  git commit -m "2nd jenkins test"
+  176  git push origin master:testing
+  177  mvn
+  178  wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+  179  tar -zxvf apache-maven-3.5.4-bin.tar.gz
+  180  sudo mv apache-maven-3.5.4 /usr/local/bin/
+  181  ls -ltr /usr/local/bin/
+  182  mvn
+  183  /usr/local/bin/apache-maven-3.5.4/bin/mvn
+  184  sudo yum -y install java-1.8.0-openjdk-devel
+  185  javac
+  186  history
