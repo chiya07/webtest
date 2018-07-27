@@ -1,0 +1,461 @@
+student05:~/environment $ ls
+apache-maven-3.5.4-bin.tar.gz  privateKey.pem  README.md  webtest
+student05:~/environment $ chmod 600 privateKey.pem
+student05:~/environment $ ssh -i privateKey.pem ec2-user@ec2-18-208-130-150.compute-1.amazonaws.com
+The authenticity of host 'ec2-18-208-130-150.compute-1.amazonaws.com (18.208.130.150)' can't be established.
+ECDSA key fingerprint is SHA256:BsdkAWuuh7xOdtpkpBJN3LDft649iPjVDtyI9CGJTko.
+ECDSA key fingerprint is MD5:04:30:8a:13:24:19:a4:23:a7:c1:11:ff:91:10:d6:42.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'ec2-18-208-130-150.compute-1.amazonaws.com,18.208.130.150' (ECDSA) to the list of known hosts.
+[ec2-user@ip-10-1-1-231 ~]$ ls -ltr
+total 0
+drwxr-xr-x. 4 root root 76 Jul 24 07:31 webtest
+[ec2-user@ip-10-1-1-231 ~]$ cd webtest/
+[ec2-user@ip-10-1-1-231 webtest]$ ls
+Git LAB Output  index.html
+[ec2-user@ip-10-1-1-231 webtest]$ pwd
+/home/ec2-user/webtest
+[ec2-user@ip-10-1-1-231 we^C
+cgi-bin/ html/
+[ec2-user@ip-10-1-1-231 webtest]$ cd /var/www/html/
+[ec2-user@ip-10-1-1-231 html]$ ls
+_config.yml  index.html
+[ec2-user@ip-10-1-1-231 html]$ sudo yum -y stress
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+No such command: stress. Please use /bin/yum --help
+[ec2-user@ip-10-1-1-231 html]$ wget
+-bash: wget: command not found
+[ec2-user@ip-10-1-1-231 html]$ sudo yum -y install wget
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+rhui-REGION-client-config-server-7                                                    | 2.9 kB  00:00:00
+rhui-REGION-rhel-server-releases                                                      | 3.5 kB  00:00:00
+rhui-REGION-rhel-server-rh-common                                                     | 3.8 kB  00:00:00
+(1/2): rhui-REGION-rhel-server-releases/7Server/x86_64/updateinfo                     | 2.9 MB  00:00:00
+(2/2): rhui-REGION-rhel-server-releases/7Server/x86_64/primary_db                     |  55 MB  00:00:01
+Resolving Dependencies
+--> Running transaction check
+---> Package wget.x86_64 0:1.14-15.el7_4.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package        Arch             Version                    Repository                                  Size
+=============================================================================================================
+Installing:
+ wget           x86_64           1.14-15.el7_4.1            rhui-REGION-rhel-server-releases           547 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total download size: 547 k
+Installed size: 2.0 M
+Downloading packages:
+wget-1.14-15.el7_4.1.x86_64.rpm                                                       | 547 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : wget-1.14-15.el7_4.1.x86_64                                                               1/1
+  Verifying  : wget-1.14-15.el7_4.1.x86_64                                                               1/1
+
+Installed:
+  wget.x86_64 0:1.14-15.el7_4.1
+
+Complete!
+[ec2-user@ip-10-1-1-231 html]$ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+--2018-07-25 09:52:25--  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+Resolving dl.fedoraproject.org (dl.fedoraproject.org)... 209.132.181.25, 209.132.181.23, 209.132.181.24
+Connecting to dl.fedoraproject.org (dl.fedoraproject.org)|209.132.181.25|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15080 (15K) [application/x-rpm]
+epel-release-latest-7.noarch.rpm: Permission denied
+
+Cannot write to ‘epel-release-latest-7.noarch.rpm’ (Success).
+[ec2-user@ip-10-1-1-231 html]$ sudo wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.r
+pm
+--2018-07-25 09:52:35--  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+Resolving dl.fedoraproject.org (dl.fedoraproject.org)... 209.132.181.24, 209.132.181.25, 209.132.181.23
+Connecting to dl.fedoraproject.org (dl.fedoraproject.org)|209.132.181.24|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15080 (15K) [application/x-rpm]
+Saving to: ‘epel-release-latest-7.noarch.rpm’
+
+100%[===================================================================>] 15,080      --.-K/s   in 0.06s
+
+2018-07-25 09:52:35 (257 KB/s) - ‘epel-release-latest-7.noarch.rpm’ saved [15080/15080]
+
+[ec2-user@ip-10-1-1-231 html]$ sudo yum -y install epel-release-latest-7.noarch.rpm
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+Examining epel-release-latest-7.noarch.rpm: epel-release-7-11.noarch
+Marking epel-release-latest-7.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:7-11 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package                 Arch              Version            Repository                                Size
+=============================================================================================================
+Installing:
+ epel-release            noarch            7-11               /epel-release-latest-7.noarch             24 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total size: 24 k
+Installed size: 24 k
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : epel-release-7-11.noarch                                                                  1/1
+  Verifying  : epel-release-7-11.noarch                                                                  1/1
+
+Installed:
+  epel-release.noarch 0:7-11
+
+Complete!
+[ec2-user@ip-10-1-1-231 html]$ sudo yum -y install stress
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+epel/x86_64/metalink                                                                  |  19 kB  00:00:00
+epel                                                                                  | 3.2 kB  00:00:00
+(1/3): epel/x86_64/group_gz                                                           |  88 kB  00:00:00
+(2/3): epel/x86_64/updateinfo                                                         | 928 kB  00:00:00
+(3/3): epel/x86_64/primary                                                            | 3.5 MB  00:00:06
+epel                                                                                             12619/12619
+Resolving Dependencies
+--> Running transaction check
+---> Package stress.x86_64 0:1.0.4-16.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package                 Arch                    Version                         Repository             Size
+=============================================================================================================
+Installing:
+ stress                  x86_64                  1.0.4-16.el7                    epel                   39 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total download size: 39 k
+Installed size: 94 k
+Downloading packages:
+warning: /var/cache/yum/x86_64/7Server/epel/packages/stress-1.0.4-16.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 352c64e5: NOKEY
+Public key for stress-1.0.4-16.el7.x86_64.rpm is not installed
+stress-1.0.4-16.el7.x86_64.rpm                                                        |  39 kB  00:00:00
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Importing GPG key 0x352C64E5:
+ Userid     : "Fedora EPEL (7) <epel@fedoraproject.org>"
+ Fingerprint: 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+ Package    : epel-release-7-11.noarch (installed)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : stress-1.0.4-16.el7.x86_64                                                                1/1
+  Verifying  : stress-1.0.4-16.el7.x86_64                                                                1/1
+
+Installed:
+  stress.x86_64 0:1.0.4-16.el7
+
+Complete!
+[ec2-user@ip-10-1-1-231 html]$ stress -c 10 -t 100000 &
+[1] 1302
+[ec2-user@ip-10-1-1-231 html]$ stress: info: [1302] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+
+[ec2-user@ip-10-1-1-231 html]$ top
+top - 09:54:25 up 38 min,  1 user,  load average: 5.85, 1.65, 0.60
+Tasks:  98 total,  11 running,  87 sleeping,   0 stopped,   0 zombie
+%Cpu(s):100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1013900 total,   308000 free,    84504 used,   621396 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   747960 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 1304 ec2-user  20   0    7308     96      0 R 10.3  0.0   0:05.38 stress
+ 1305 ec2-user  20   0    7308     96      0 R 10.3  0.0   0:05.38 stress
+ 1306 ec2-user  20   0    7308     96      0 R 10.3  0.0   0:05.38 stress
+ 1307 ec2-user  20   0    7308     96      0 R 10.0  0.0   0:05.37 stress
+ 1308 ec2-user  20   0    7308     96      0 R 10.0  0.0   0:05.37 stress
+ 1309 ec2-user  20   0    7308     96      0 R 10.0  0.0   0:05.37 stress
+ 1310 ec2-user  20   0    7308     96      0 R 10.0  0.0   0:05.37 stress
+ 1311 ec2-user  20   0    7308     96      0 R 10.0  0.0   0:05.37 stress
+ 1312 ec2-user  20   0    7308     96      0 R 10.0  0.0   0:05.37 stress
+[ec2-user@ip-10-1-1-231 html]$ logout
+Connection to ec2-18-208-130-150.compute-1.amazonaws.com closed.
+student05:~/environment $ ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-209-250-59.compute-1.amazonaws.com (54.209.250.59)' can't be established.
+ECDSA key fingerprint is SHA256:BsdkAWuuh7xOdtpkpBJN3LDft649iPjVDtyI9CGJTko.
+ECDSA key fingerprint is MD5:04:30:8a:13:24:19:a4:23:a7:c1:11:ff:91:10:d6:42.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'ec2-54-209-250-59.compute-1.amazonaws.com,54.209.250.59' (ECDSA) to the list of known hosts.
+[ec2-user@ip-10-1-2-84 ~]$ wget
+-bash: wget: command not found
+[ec2-user@ip-10-1-2-84 ~]$ sudo yum -y install wget
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+rhui-REGION-client-config-server-7                                                    | 2.9 kB  00:00:00
+rhui-REGION-rhel-server-releases                                                      | 3.5 kB  00:00:00
+rhui-REGION-rhel-server-rh-common                                                     | 3.8 kB  00:00:00
+(1/2): rhui-REGION-rhel-server-releases/7Server/x86_64/updateinfo                     | 2.9 MB  00:00:00
+(2/2): rhui-REGION-rhel-server-releases/7Server/x86_64/primary_db                     |  55 MB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package wget.x86_64 0:1.14-15.el7_4.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package        Arch             Version                    Repository                                  Size
+=============================================================================================================
+Installing:
+ wget           x86_64           1.14-15.el7_4.1            rhui-REGION-rhel-server-releases           547 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total download size: 547 k
+Installed size: 2.0 M
+Downloading packages:
+wget-1.14-15.el7_4.1.x86_64.rpm                                                       | 547 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : wget-1.14-15.el7_4.1.x86_64                                                               1/1
+  Verifying  : wget-1.14-15.el7_4.1.x86_64                                                               1/1
+
+Installed:
+  wget.x86_64 0:1.14-15.el7_4.1
+
+Complete!
+[ec2-user@ip-10-1-2-84 ~]$ wget
+wget: missing URL
+Usage: wget [OPTION]... [URL]...
+
+Try `wget --help' for more options.
+[ec2-user@ip-10-1-2-84 ~]$ sudo wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+--2018-07-25 09:55:48--  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+Resolving dl.fedoraproject.org (dl.fedoraproject.org)... 209.132.181.25, 209.132.181.23, 209.132.181.24
+Connecting to dl.fedoraproject.org (dl.fedoraproject.org)|209.132.181.25|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15080 (15K) [application/x-rpm]
+Saving to: ‘epel-release-latest-7.noarch.rpm’
+
+100%[===================================================================>] 15,080      --.-K/s   in 0.06s
+
+2018-07-25 09:55:48 (255 KB/s) - ‘epel-release-latest-7.noarch.rpm’ saved [15080/15080]
+
+[ec2-user@ip-10-1-2-84 ~]$ sudo yum -y install epel-release-latest-7.noarch.rpm
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+Examining epel-release-latest-7.noarch.rpm: epel-release-7-11.noarch
+Marking epel-release-latest-7.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:7-11 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package                 Arch              Version            Repository                                Size
+=============================================================================================================
+Installing:
+ epel-release            noarch            7-11               /epel-release-latest-7.noarch             24 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total size: 24 k
+Installed size: 24 k
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : epel-release-7-11.noarch                                                                  1/1
+  Verifying  : epel-release-7-11.noarch                                                                  1/1
+
+Installed:
+  epel-release.noarch 0:7-11
+
+Complete!
+[ec2-user@ip-10-1-2-84 ~]$ sudo yum -y install stress
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+epel/x86_64/metalink                                                                  |  19 kB  00:00:00
+epel                                                                                  | 3.2 kB  00:00:00
+(1/3): epel/x86_64/group_gz                                                           |  88 kB  00:00:00
+(2/3): epel/x86_64/updateinfo                                                         | 928 kB  00:00:00
+(3/3): epel/x86_64/primary                                                            | 3.5 MB  00:00:04
+epel                                                                                             12619/12619
+Resolving Dependencies
+--> Running transaction check
+---> Package stress.x86_64 0:1.0.4-16.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+ Package                 Arch                    Version                         Repository             Size
+=============================================================================================================
+Installing:
+ stress                  x86_64                  1.0.4-16.el7                    epel                   39 k
+
+Transaction Summary
+=============================================================================================================
+Install  1 Package
+
+Total download size: 39 k
+Installed size: 94 k
+Downloading packages:
+warning: /var/cache/yum/x86_64/7Server/epel/packages/stress-1.0.4-16.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 352c64e5: NOKEY
+Public key for stress-1.0.4-16.el7.x86_64.rpm is not installed
+stress-1.0.4-16.el7.x86_64.rpm                                                        |  39 kB  00:00:00
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Importing GPG key 0x352C64E5:
+ Userid     : "Fedora EPEL (7) <epel@fedoraproject.org>"
+ Fingerprint: 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+ Package    : epel-release-7-11.noarch (installed)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : stress-1.0.4-16.el7.x86_64                                                                1/1
+  Verifying  : stress-1.0.4-16.el7.x86_64                                                                1/1
+
+Installed:
+  stress.x86_64 0:1.0.4-16.el7
+
+Complete!
+[ec2-user@ip-10-1-2-84 ~]$ stress -c 10 -t 100000 &
+[1] 1299
+[ec2-user@ip-10-1-2-84 ~]$ stress: info: [1299] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+
+[ec2-user@ip-10-1-2-84 ~]$ top
+top - 09:56:31 up 42 min,  1 user,  load average: 1.64, 0.38, 0.16
+Tasks:  99 total,  11 running,  88 sleeping,   0 stopped,   0 zombie
+%Cpu(s):100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1013900 total,   306484 free,    90104 used,   617312 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   742056 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 1301 ec2-user  20   0    7308    100      0 R 10.3  0.0   0:00.78 stress
+ 1302 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1303 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1304 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1305 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1306 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1307 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1308 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+ 1309 ec2-user  20   0    7308    100      0 R 10.0  0.0   0:00.77 stress
+[ec2-user@ip-10-1-2-84 ~]$ logout
+Connection to ec2-54-209-250-59.compute-1.amazonaws.com closed.
+student05:~/environment $ ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+Last login: Wed Jul 25 09:54:57 2018 from ec2-34-204-181-33.compute-1.amazonaws.com
+[ec2-user@ip-10-1-2-84 ~]$ top
+top - 09:57:08 up 43 min,  1 user,  load average: 5.49, 1.48, 0.54
+Tasks:  99 total,  11 running,  88 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 99.7 us,  0.3 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1013900 total,   306428 free,    90104 used,   617368 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   742024 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 1300 ec2-user  20   0    7308    100      0 R 10.3  0.0   0:04.46 stress
+ 1302 ec2-user  20   0    7308    100      0 R 10.3  0.0   0:04.46 stress
+ 1304 ec2-user  20   0    7308    100      0 R 10.3  0.0   0:04.46 stress
+ 1305 ec2-user  20   0    7308    100      0 R 10.3  0.0   0:04.46 stress
+ 1308 ec2-user  20   0    7308    100      0 R 10.3  0.0   0:04.46 stress
+ 1301 ec2-user  20   0    7308    100      0 R  9.6  0.0   0:04.45 stress
+ 1303 ec2-user  20   0    7308    100      0 R  9.6  0.0   0:04.45 stress
+ 1306 ec2-user  20   0    7308    100      0 R  9.6  0.0   0:04.45 stress
+ 1307 ec2-user  20   0    7308    100      0 R  9.6  0.0   0:04.45 stress
+[ec2-user@ip-10-1-2-84 ~]$ logout
+Connection to ec2-54-209-250-59.compute-1.amazonaws.com closed.
+student05:~/environment $ ssh -i privateKey.pem ec2-user@ec2-18-208-130-150.compute-1.amazonaws.com
+Last login: Wed Jul 25 09:46:05 2018 from ec2-34-204-181-33.compute-1.amazonaws.com
+[ec2-user@ip-10-1-1-231 ~]$ ps -ef|grep stress
+ec2-user  1302     1  0 09:53 ?        00:00:00 stress -c 10 -t 100000
+ec2-user  1303  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1304  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1305  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1306  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1307  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1308  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1309  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1310  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1311  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1312  1302  9 09:53 ?        00:02:45 stress -c 10 -t 100000
+ec2-user  1386  1368  0 10:21 pts/1    00:00:00 grep --color=auto stress
+[ec2-user@ip-10-1-1-231 ~]$ top
+top - 10:21:35 up  1:05,  1 user,  load average: 10.17, 10.08, 8.47
+Tasks:  99 total,  11 running,  88 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 99.7 us,  0.3 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1013900 total,   306692 free,    85284 used,   621924 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   746960 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 1304 ec2-user  20   0    7308     96      0 R 10.3  0.0   2:48.22 stress
+ 1306 ec2-user  20   0    7308     96      0 R 10.3  0.0   2:48.22 stress
+ 1307 ec2-user  20   0    7308     96      0 R 10.3  0.0   2:48.22 stress
+ 1308 ec2-user  20   0    7308     96      0 R 10.3  0.0   2:48.23 stress
+ 1312 ec2-user  20   0    7308     96      0 R 10.3  0.0   2:48.22 stress
+ 1303 ec2-user  20   0    7308     96      0 R 10.0  0.0   2:48.22 stress
+ 1309 ec2-user  20   0    7308     96      0 R 10.0  0.0   2:48.22 stress
+ 1310 ec2-user  20   0    7308     96      0 R 10.0  0.0   2:48.22 stress
+ 1311 ec2-user  20   0    7308     96      0 R 10.0  0.0   2:48.22 stress
+[ec2-user@ip-10-1-1-231 ~]$ pkill -9 stress
+[ec2-user@ip-10-1-1-231 ~]$ top
+top - 10:21:58 up  1:05,  1 user,  load average: 8.58, 9.75, 8.40
+Tasks:  88 total,   1 running,  87 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1013900 total,   307868 free,    84144 used,   621888 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   748164 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 1390 ec2-user  20   0  161840   2144   1548 R  0.3  0.2   0:00.01 top
+    1 root      20   0  127820   6476   4132 S  0.0  0.6   0:02.86 systemd
+    2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd
+    3 root      20   0       0      0      0 S  0.0  0.0   0:00.03 ksoftirqd/0
+    5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H
+    6 root      20   0       0      0      0 S  0.0  0.0   0:00.05 kworker/u30:0
+    7 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0
+    8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh
+    9 root      20   0       0      0      0 S  0.0  0.0   0:00.31 rcu_sched
+[ec2-user@ip-10-1-1-231 ~]$ logout
+Connection to ec2-18-208-130-150.compute-1.amazonaws.com closed.
+student05:~/environment $ ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+Last login: Wed Jul 25 09:56:58 2018 from ec2-34-204-181-33.compute-1.amazonaws.com
+[ec2-user@ip-10-1-2-84 ~]$ top
+top - 10:22:25 up  1:08,  1 user,  load average: 10.19, 10.09, 8.26
+Tasks:  99 total,  11 running,  88 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 99.7 us,  0.3 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1013900 total,   306332 free,    90080 used,   617488 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   742080 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                                   
+ 1309 ec2-user  20   0    7308    100      0 R 10.3  0.0   2:36.06 stress                                    
+ 1300 ec2-user  20   0    7308    100      0 R 10.0  0.0   2:36.05 stress                                    
+ 1302 ec2-user  20   0    7308    100      0 R 10.0  0.0   2:36.06 stress                                    
+ 1304 ec2-user  20   0    7308    100      0 R 10.0  0.0   2:36.06 stress                                    
+ 1305 ec2-user  20   0    7308    100      0 R 10.0  0.0   2:36.06 stress                                    
+ 1306 ec2-user  20   0    7308    100      0 R 10.0  0.0   2:36.05 stress                                    
+ 1307 ec2-user  20   0    7308    100      0 R 10.0  0.0   2:36.06 stress                                    
+ 1301 ec2-user  20   0    7308    100      0 R  9.7  0.0   2:36.05 stress                                    
+ 1303 ec2-user  20   0    7308    100      0 R  9.7  0.0   2:36.05 stress                                    
+[ec2-user@ip-10-1-2-84 ~]$ pkill -9 stress
+[ec2-user@ip-10-1-2-84 ~]$ logout
+Connection to ec2-54-209-250-59.compute-1.amazonaws.com closed.
+student05:~/environment $ 
+student05:~/environment $ 

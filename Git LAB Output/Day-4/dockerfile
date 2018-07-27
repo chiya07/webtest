@@ -1,0 +1,11 @@
+FROM centos:7
+RUN yum -y install httpd
+ADD code /var/www/html
+COPY
+EXPOSE 80
+ENV
+
+## docker history will show all inheritance command. At least one CMD or ENTRYPOINT should be there
+## avoid wiriting CMD apachectl -D FOREGROUND which will launch a shell and then execute the script
+CMD
+ENTRYPOINT ["apachectl","-D","FOREGROUND"]

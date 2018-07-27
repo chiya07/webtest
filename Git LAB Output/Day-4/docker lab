@@ -1,0 +1,5 @@
+mkdir code
+echo "<h1> This is test docker </h1>" > code/index.html
+docker run -d --name my-apache-app -p 8000:80 -v /home/ec2-user/environment/code:/usr/local/apache2/htdocs/ httpd:2.4
+
+docker history will show all inheritance command. At least one CMD or ENTRYPOINT should be there
