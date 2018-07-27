@@ -1,0 +1,17 @@
+FROM ubuntu:latest
+#RUN apt-get install yum*
+RUN apt-get update
+#RUN apt-get update tzdata
+#RUN apt-get update -y && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update -y  && apt-get install -y tzdata
+ENV TZ=Asia/Kolkata
+#ADD config /opt
+#RUN apt-get -y install `cat /opt/pagkages`
+#RUN yum install -y nginx php php-gd php-mysql
+RUN apt-get install -y nginx
+RUN apt-get install -y php
+RUN apt-get install -y php-gd
+RUN apt-get install -y php-mysql
+COPY code/* /var/www/html/
+EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
