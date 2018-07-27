@@ -1,0 +1,36 @@
+wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/v1.8.13/bin/linux/amd64/kubectl
+
+aws s3api create-bucket --bucket kube-chi007-ga-state-store  --region us-east-1
+
+aws s3api put-bucket-versioning --bucket kube-chi007-ga-state-store  --versioning-configuration Status=Enabled
+
+export NAME=kubecluster.chi007.ga
+export KOPS_STATE_STORE=s3://kube-chi007-ga-state-store
+
+ssh-keygen
+
+kops create cluster \
+    --zones=us-east-1a,us-east-1b,us-east-1c \
+    --master-zones=us-east-1a,us-east-1b,us-east-1c \
+    --master-count=3 \
+    --node-count=4 \
+    --node-size=t2.small \
+    --master-size=t2.small \
+    --name ${NAME}
+  
+kops edit cluster ${NAME}
+
+# masterInternalName: api.internal.kubecluster.chi007.ga
+# masterPublicName: api.kubecluster.chi007.ga
+
+kops update cluster ${NAME} --yes
+
+## Output of the above command for reference:
+Cluster is starting.  It should be ready in a few minutes.
+
+Suggestions:
+ * validate cluster: kops validate cluster
+ * list nodes: kubectl get nodes --show-labels
+ * ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.kubecluster.chi007.ga
+The admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
+ * read about installing addons: https://github.com/kubernetes/kops/blob/master/docs/addons.md

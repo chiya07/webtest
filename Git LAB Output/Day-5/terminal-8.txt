@@ -1,0 +1,947 @@
+Tolerations:     node.alpha.kubernetes.io/notReady:NoExecute for 300s
+                 node.alpha.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason                 Age   From                                   Message
+  ----    ------                 ----  ----                                   -------
+  Normal  Scheduled              5m    default-scheduler                      Successfully assigned nginx-deployment-5689b44649-tkc24 to ip-172-20-98-19.ec2.internal
+  Normal  SuccessfulMountVolume  5m    kubelet, ip-172-20-98-19.ec2.internal  MountVolume.SetUp succeeded for volume "default-token-n8j2s"
+  Normal  Pulling                5m    kubelet, ip-172-20-98-19.ec2.internal  pulling image "chiya07/test:latest"
+  Normal  Pulled                 5m    kubelet, ip-172-20-98-19.ec2.internal  Successfully pulled image "chiya07/test:latest"
+  Normal  Created                5m    kubelet, ip-172-20-98-19.ec2.internal  Created container
+  Normal  Started                5m    kubelet, ip-172-20-98-19.ec2.internal  Started container
+
+
+Name:                     frontend
+Namespace:                myns
+Labels:                   <none>
+Annotations:              kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"frontend","namespace":"myns"},"spec":{"ports":[{"port":80,"protocol":"TCP","ta...
+Selector:                 app=nginx
+Type:                     LoadBalancer
+IP:                       100.64.7.80
+LoadBalancer Ingress:     ae2efb193916511e898fe0ece4bf167f-1841536207.us-east-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30590/TCP
+Endpoints:                100.96.3.2:80,100.96.5.3:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  5m    service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   5m    service-controller  Ensured load balancer
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          6m
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          6m
+student05:~/environment $ kubectl get services
+NAME       TYPE           CLUSTER-IP    EXTERNAL-IP        PORT(S)        AGE
+frontend   LoadBalancer   100.64.7.80   ae2efb1939165...   80:30590/TCP   6m
+student05:~/environment $ kubectl get deployments
+NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   2         2         2            2           9m
+student05:~/environment $ kubectl get horizontalpodscaling
+the server doesn't have a resource type "horizontalpodscaling"
+student05:~/environment $ kubectl get horizontalpodautoscaling
+the server doesn't have a resource type "horizontalpodautoscaling"
+student05:~/environment $ kubectl get hpa
+No resources found.
+student05:~/environment $ kubectl get replicationsets
+the server doesn't have a resource type "replicationsets"
+student05:~/environment $ kubectl get rs
+NAME                          DESIRED   CURRENT   READY     AGE
+nginx-deployment-5689b44649   2         2         2         15m
+student05:~/environment $ kubectl apply -f webtest/Git\ LAB\ Output/Day-5/webapp-dc.yaml 
+deployment "nginx-deployment" configured
+service "frontend" unchanged
+student05:~/environment $ kubectl rs
+Error: unknown command "rs" for "kubectl"
+
+Did you mean this?
+        run
+        cp
+
+Run 'kubectl --help' for usage.
+student05:~/environment $ kubectl get rs
+NAME                          DESIRED   CURRENT   READY     AGE
+nginx-deployment-5689b44649   4         2         2         17m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          17m
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          17m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          17m
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          17m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          17m
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          17m
+student05:~/environment $ kubestl scale
+bash: kubestl: command not found
+student05:~/environment $ kubectl scale
+error: You must provide one or more resources by argument or filename.
+Example resource specifications include:
+   '-f rsrc.yaml'
+   '--filename=rsrc.json'
+   '<resource> <name>'
+   '<resource>'
+See 'kubectl scale -h' for help and examples.
+student05:~/environment $ kubectl scale deployment nginx-deployment-5689b44649
+error: The --replicas=COUNT flag is required, and COUNT must be greater than or equal to 0
+See 'kubectl scale -h' for help and examples.
+student05:~/environment $ kubectl scale deployment nginx-deployment-5689b44649 --replicas=3
+Error from server (NotFound): deployments.extensions "nginx-deployment-5689b44649" not found
+student05:~/environment $ kubectl scale deployment  --replicas=3
+error: resource(s) were provided, but no name, label selector, or --all flag specified
+student05:~/environment $ kubectl get deployments
+NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   4         2         2            2           20m
+student05:~/environment $ kubectl scale deployment nginx-deployment --replicas=3
+deployment "nginx-deployment" scaled
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          20m
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          20m
+student05:~/environment $ kubectl describe deployment nginx-deployment
+Name:                   nginx-deployment
+Namespace:              myns
+CreationTimestamp:      Fri, 27 Jul 2018 06:25:41 +0000
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision=1
+                        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"nginx-deployment","namespace":"myns"},"spec":{"replicas":4,"selec...
+Selector:               app=nginx
+Replicas:               3 desired | 2 updated | 2 total | 2 available | 1 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:  chiya07/test:latest
+    Port:   80/TCP
+    Limits:
+      cpu:     1
+      memory:  500Mi
+    Requests:
+      cpu:        500m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type             Status  Reason
+  ----             ------  ------
+  Progressing      True    NewReplicaSetAvailable
+  Available        False   MinimumReplicasUnavailable
+  ReplicaFailure   True    FailedCreate
+OldReplicaSets:    <none>
+NewReplicaSet:     nginx-deployment-5689b44649 (2/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  21m   deployment-controller  Scaled up replica set nginx-deployment-5689b44649 to 2
+  Normal  ScalingReplicaSet  4m    deployment-controller  Scaled up replica set nginx-deployment-5689b44649 to 4
+  Normal  ScalingReplicaSet  36s   deployment-controller  Scaled down replica set nginx-deployment-5689b44649 to 3
+student05:~/environment $ kubectl delete resource-quota nginx-deployment
+the server doesn't have a resource type "resource-quota"
+student05:~/environment $ kubectl delete resourcequota nginx
+Error from server (NotFound): resourcequotas "nginx" not found
+student05:~/environment $ kubectl delete resourcequota nginx-deployment
+Error from server (NotFound): resourcequotas "nginx-deployment" not found
+student05:~/environment $ kubectl delete resource-quota nginx-deployment                                   
+the server doesn't have a resource type "resource-quota"
+student05:~/environment $ kubectl delete resource-quota nginx
+the server doesn't have a resource type "resource-quota"
+student05:~/environment $ kubectl delete resource-quota nginx --namespace myns
+the server doesn't have a resource type "resource-quota"
+student05:~/environment $ kubectl get resource-quota nginx --namespace myns                                
+the server doesn't have a resource type "resource-quota"
+student05:~/environment $ kubectl get resource-quota
+the server doesn't have a resource type "resource-quota"
+student05:~/environment $ kubectl get resourcequota
+NAME      AGE
+myns      1h
+student05:~/environment $ kubectl delete resourcequota myns
+resourcequota "myns" deleted
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          27m
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          27m
+student05:~/environment $ kubectl scale deployment nginx-deployment --replicas=4
+deployment "nginx-deployment" scaled
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS              RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running             0          27m
+nginx-deployment-5689b44649-qbgpt   0/1       ContainerCreating   0          3s
+nginx-deployment-5689b44649-qf2fj   0/1       ContainerCreating   0          3s
+nginx-deployment-5689b44649-tkc24   1/1       Running             0          27m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS              RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running             0          27m
+nginx-deployment-5689b44649-qbgpt   0/1       ContainerCreating   0          8s
+nginx-deployment-5689b44649-qf2fj   0/1       ContainerCreating   0          8s
+nginx-deployment-5689b44649-tkc24   1/1       Running             0          27m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS              RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running             0          28m
+nginx-deployment-5689b44649-qbgpt   0/1       ContainerCreating   0          10s
+nginx-deployment-5689b44649-qf2fj   0/1       ContainerCreating   0          10s
+nginx-deployment-5689b44649-tkc24   1/1       Running             0          28m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          28m
+nginx-deployment-5689b44649-qbgpt   1/1       Running   0          12s
+nginx-deployment-5689b44649-qf2fj   1/1       Running   0          12s
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          28m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          28m
+nginx-deployment-5689b44649-qbgpt   1/1       Running   0          14s
+nginx-deployment-5689b44649-qf2fj   1/1       Running   0          14s
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          28m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          28m
+nginx-deployment-5689b44649-qbgpt   1/1       Running   0          15s
+nginx-deployment-5689b44649-qf2fj   1/1       Running   0          15s
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          28m
+student05:~/environment $ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5689b44649-8458p   1/1       Running   0          28m
+nginx-deployment-5689b44649-qbgpt   1/1       Running   0          17s
+nginx-deployment-5689b44649-qf2fj   1/1       Running   0          17s
+nginx-deployment-5689b44649-tkc24   1/1       Running   0          28m
+student05:~/environment $ kubectl get servicesw
+the server doesn't have a resource type "servicesw"
+student05:~/environment $ kubectl get services
+NAME       TYPE           CLUSTER-IP    EXTERNAL-IP        PORT(S)        AGE
+frontend   LoadBalancer   100.64.7.80   ae2efb1939165...   80:30590/TCP   29m
+student05:~/environment $ kubectl describe frontend
+the server doesn't have a resource type "frontend"
+student05:~/environment $ kubectl describe service frontend
+Name:                     frontend
+Namespace:                myns
+Labels:                   <none>
+Annotations:              kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"frontend","namespace":"myns"},"spec":{"ports":[{"port":80,"protocol":"TCP","ta...
+Selector:                 app=nginx
+Type:                     LoadBalancer
+IP:                       100.64.7.80
+LoadBalancer Ingress:     ae2efb193916511e898fe0ece4bf167f-1841536207.us-east-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30590/TCP
+Endpoints:                100.96.3.2:80,100.96.4.3:80,100.96.5.3:80 + 1 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  29m   service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   29m   service-controller  Ensured load balancer
+student05:~/environment $ kubectl delete deployment nginx
+Error from server (NotFound): deployments.extensions "nginx" not found
+student05:~/environment $ kubectl get deployments
+NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   4         4         4            4           2h
+student05:~/environment $ kubectl delete deployment nginx-deployment
+deployment "nginx-deployment" deleted
+student05:~/environment $ kubectl get services
+NAME       TYPE           CLUSTER-IP    EXTERNAL-IP        PORT(S)        AGE
+frontend   LoadBalancer   100.64.7.80   ae2efb1939165...   80:30590/TCP   2h
+student05:~/environment $ kubectl delete service frontend
+service "frontend" deleted
+student05:~/environment $ kubectl get all
+No resources found.
+student05:~/environment $ sudo groups docker
+groups: docker: no such user
+student05:~/environment $ sudo groups jenkins
+jenkins : jenkins
+student05:~/environment $ sudo usermod -a -G docker jenkins
+student05:~/environment $ sudo service jenkins
+Usage: /etc/init.d/jenkins {start|stop|status|try-restart|restart|force-reload|reload|probe}
+student05:~/environment $ sudo service jenkins restart
+Shutting down Jenkins                                      [  OK  ]
+Starting Jenkins                                           [  OK  ]
+student05:~/environment $ sudo yum -y install ansible
+Loaded plugins: priorities, update-motd, upgrade-helper
+amzn-main                                                                           | 2.1 kB  00:00:00     
+amzn-updates                                                                        | 2.5 kB  00:00:00     
+1045 packages excluded due to repository priority protections
+Resolving Dependencies
+--> Running transaction check
+---> Package ansible.noarch 0:2.5.5-1.el6 will be installed
+--> Processing Dependency: python(abi) = 2.6 for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: sshpass for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-six for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-simplejson for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-setuptools for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-paramiko for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-keyczar for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-jinja2-26 for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-httplib2 for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-crypto2.6 for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: python-crypto for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: PyYAML for package: ansible-2.5.5-1.el6.noarch
+--> Processing Dependency: /usr/bin/python2.6 for package: ansible-2.5.5-1.el6.noarch
+--> Running transaction check
+---> Package python-crypto2.6.x86_64 0:2.6.1-2.el6 will be installed
+--> Processing Dependency: libpython2.6.so.1.0()(64bit) for package: python-crypto2.6-2.6.1-2.el6.x86_64
+---> Package python-jinja2-26.noarch 0:2.6-3.el6 will be installed
+--> Processing Dependency: python-babel >= 0.8 for package: python-jinja2-26-2.6-3.el6.noarch
+--> Processing Dependency: python-markupsafe for package: python-jinja2-26-2.6-3.el6.noarch
+---> Package python-keyczar.noarch 0:0.71c-1.el6 will be installed
+--> Processing Dependency: python-pyasn1 for package: python-keyczar-0.71c-1.el6.noarch
+---> Package python26.x86_64 0:2.6.9-2.89.amzn1 will be installed
+---> Package python26-PyYAML.x86_64 0:3.10-3.10.amzn1 will be installed
+---> Package python26-crypto.x86_64 0:2.6.1-1.15.amzn1 will be installed
+---> Package python26-httplib2.noarch 0:0.7.7-1.5.amzn1 will be installed
+---> Package python26-paramiko.noarch 0:1.15.1-2.6.amzn1 will be installed
+--> Processing Dependency: python26-ecdsa for package: python26-paramiko-1.15.1-2.6.amzn1.noarch
+---> Package python26-setuptools.noarch 0:36.2.7-1.33.amzn1 will be installed
+--> Processing Dependency: python26-backports-ssl_match_hostname for package: python26-setuptools-36.2.7-1.33.amzn1.noarch
+---> Package python26-simplejson.x86_64 0:3.6.5-1.12.amzn1 will be installed
+---> Package python26-six.noarch 0:1.8.0-1.23.amzn1 will be installed
+---> Package sshpass.x86_64 0:1.06-1.el6 will be installed
+--> Running transaction check
+---> Package python26-babel.noarch 0:0.9.4-5.1.8.amzn1 will be installed
+---> Package python26-backports-ssl_match_hostname.noarch 0:3.4.0.2-1.12.amzn1 will be installed
+--> Processing Dependency: python26-backports for package: python26-backports-ssl_match_hostname-3.4.0.2-1.12.amzn1.noarch
+---> Package python26-ecdsa.noarch 0:0.11-3.3.amzn1 will be installed
+---> Package python26-libs.x86_64 0:2.6.9-2.89.amzn1 will be installed
+---> Package python26-markupsafe.x86_64 0:0.11-4.6.amzn1 will be installed
+---> Package python26-pyasn1.noarch 0:0.1.7-2.9.amzn1 will be installed
+--> Running transaction check
+---> Package python26-backports.x86_64 0:1.0-3.14.amzn1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===========================================================================================================
+ Package                                     Arch         Version                    Repository       Size
+===========================================================================================================
+Installing:
+ ansible                                     noarch       2.5.5-1.el6                epel            9.4 M
+Installing for dependencies:
+ python-crypto2.6                            x86_64       2.6.1-2.el6                epel            513 k
+ python-jinja2-26                            noarch       2.6-3.el6                  epel            527 k
+ python-keyczar                              noarch       0.71c-1.el6                epel            219 k
+ python26                                    x86_64       2.6.9-2.89.amzn1           amzn-main       5.8 M
+ python26-PyYAML                             x86_64       3.10-3.10.amzn1            amzn-main       186 k
+ python26-babel                              noarch       0.9.4-5.1.8.amzn1          amzn-main       1.8 M
+ python26-backports                          x86_64       1.0-3.14.amzn1             amzn-main       5.2 k
+ python26-backports-ssl_match_hostname       noarch       3.4.0.2-1.12.amzn1         amzn-main        12 k
+ python26-crypto                             x86_64       2.6.1-1.15.amzn1           amzn-main       700 k
+ python26-ecdsa                              noarch       0.11-3.3.amzn1             amzn-main        77 k
+ python26-httplib2                           noarch       0.7.7-1.5.amzn1            amzn-main        81 k
+ python26-libs                               x86_64       2.6.9-2.89.amzn1           amzn-main       697 k
+ python26-markupsafe                         x86_64       0.11-4.6.amzn1             amzn-main        27 k
+ python26-paramiko                           noarch       1.15.1-2.6.amzn1           amzn-main       1.3 M
+ python26-pyasn1                             noarch       0.1.7-2.9.amzn1            amzn-main       112 k
+ python26-setuptools                         noarch       36.2.7-1.33.amzn1          amzn-main       675 k
+ python26-simplejson                         x86_64       3.6.5-1.12.amzn1           amzn-main       210 k
+ python26-six                                noarch       1.8.0-1.23.amzn1           amzn-main        31 k
+ sshpass                                     x86_64       1.06-1.el6                 epel             20 k
+
+Transaction Summary
+===========================================================================================================
+Install  1 Package (+19 Dependent packages)
+
+Total download size: 22 M
+Installed size: 89 M
+Downloading packages:
+(1/20): ansible-2.5.5-1.el6.noarch.rpm                                              | 9.4 MB  00:00:00     
+(2/20): python-crypto2.6-2.6.1-2.el6.x86_64.rpm                                     | 513 kB  00:00:00     
+(3/20): python-jinja2-26-2.6-3.el6.noarch.rpm                                       | 527 kB  00:00:00     
+(4/20): python-keyczar-0.71c-1.el6.noarch.rpm                                       | 219 kB  00:00:00     
+(5/20): python26-PyYAML-3.10-3.10.amzn1.x86_64.rpm                                  | 186 kB  00:00:00     
+(6/20): python26-babel-0.9.4-5.1.8.amzn1.noarch.rpm                                 | 1.8 MB  00:00:00     
+(7/20): python26-2.6.9-2.89.amzn1.x86_64.rpm                                        | 5.8 MB  00:00:00     
+(8/20): python26-backports-ssl_match_hostname-3.4.0.2-1.12.amzn1.noarch.rpm         |  12 kB  00:00:00     
+(9/20): python26-crypto-2.6.1-1.15.amzn1.x86_64.rpm                                 | 700 kB  00:00:00     
+(10/20): python26-ecdsa-0.11-3.3.amzn1.noarch.rpm                                   |  77 kB  00:00:00     
+(11/20): python26-httplib2-0.7.7-1.5.amzn1.noarch.rpm                               |  81 kB  00:00:00     
+(12/20): python26-libs-2.6.9-2.89.amzn1.x86_64.rpm                                  | 697 kB  00:00:00     
+(13/20): python26-markupsafe-0.11-4.6.amzn1.x86_64.rpm                              |  27 kB  00:00:00     
+(14/20): python26-paramiko-1.15.1-2.6.amzn1.noarch.rpm                              | 1.3 MB  00:00:00     
+(15/20): python26-pyasn1-0.1.7-2.9.amzn1.noarch.rpm                                 | 112 kB  00:00:00     
+(16/20): python26-setuptools-36.2.7-1.33.amzn1.noarch.rpm                           | 675 kB  00:00:00     
+(17/20): python26-simplejson-3.6.5-1.12.amzn1.x86_64.rpm                            | 210 kB  00:00:00     
+(18/20): python26-six-1.8.0-1.23.amzn1.noarch.rpm                                   |  31 kB  00:00:00     
+(19/20): sshpass-1.06-1.el6.x86_64.rpm                                              |  20 kB  00:00:00     
+(20/20): python26-backports-1.0-3.14.amzn1.x86_64.rpm                               | 5.2 kB  00:00:01     
+-----------------------------------------------------------------------------------------------------------
+Total                                                                       11 MB/s |  22 MB  00:00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : python26-libs-2.6.9-2.89.amzn1.x86_64                                                  1/20 
+  Installing : python26-2.6.9-2.89.amzn1.x86_64                                                       2/20 
+  Installing : python26-crypto-2.6.1-1.15.amzn1.x86_64                                                3/20 
+  Installing : python26-six-1.8.0-1.23.amzn1.noarch                                                   4/20 
+  Installing : python26-ecdsa-0.11-3.3.amzn1.noarch                                                   5/20 
+  Installing : python26-paramiko-1.15.1-2.6.amzn1.noarch                                              6/20 
+  Installing : python26-simplejson-3.6.5-1.12.amzn1.x86_64                                            7/20 
+  Installing : python26-backports-1.0-3.14.amzn1.x86_64                                               8/20 
+  Installing : python26-backports-ssl_match_hostname-3.4.0.2-1.12.amzn1.noarch                        9/20 
+  Installing : python26-setuptools-36.2.7-1.33.amzn1.noarch                                          10/20 
+  Installing : python26-babel-0.9.4-5.1.8.amzn1.noarch                                               11/20 
+  Installing : python26-PyYAML-3.10-3.10.amzn1.x86_64                                                12/20 
+  Installing : python26-httplib2-0.7.7-1.5.amzn1.noarch                                              13/20 
+  Installing : python26-markupsafe-0.11-4.6.amzn1.x86_64                                             14/20 
+  Installing : python-jinja2-26-2.6-3.el6.noarch                                                     15/20 
+  Installing : python-crypto2.6-2.6.1-2.el6.x86_64                                                   16/20 
+  Installing : python26-pyasn1-0.1.7-2.9.amzn1.noarch                                                17/20 
+  Installing : python-keyczar-0.71c-1.el6.noarch                                                     18/20 
+  Installing : sshpass-1.06-1.el6.x86_64                                                             19/20 
+  Installing : ansible-2.5.5-1.el6.noarch                                                            20/20 
+  Verifying  : python26-simplejson-3.6.5-1.12.amzn1.x86_64                                            1/20 
+  Verifying  : python26-backports-1.0-3.14.amzn1.x86_64                                               2/20 
+  Verifying  : sshpass-1.06-1.el6.x86_64                                                              3/20 
+  Verifying  : python-keyczar-0.71c-1.el6.noarch                                                      4/20 
+  Verifying  : python26-ecdsa-0.11-3.3.amzn1.noarch                                                   5/20 
+  Verifying  : python26-babel-0.9.4-5.1.8.amzn1.noarch                                                6/20 
+  Verifying  : python26-setuptools-36.2.7-1.33.amzn1.noarch                                           7/20 
+  Verifying  : python26-PyYAML-3.10-3.10.amzn1.x86_64                                                 8/20 
+  Verifying  : python26-backports-ssl_match_hostname-3.4.0.2-1.12.amzn1.noarch                        9/20 
+  Verifying  : python26-httplib2-0.7.7-1.5.amzn1.noarch                                              10/20 
+  Verifying  : python26-six-1.8.0-1.23.amzn1.noarch                                                  11/20 
+  Verifying  : python26-crypto-2.6.1-1.15.amzn1.x86_64                                               12/20 
+  Verifying  : python26-markupsafe-0.11-4.6.amzn1.x86_64                                             13/20 
+  Verifying  : ansible-2.5.5-1.el6.noarch                                                            14/20 
+  Verifying  : python26-paramiko-1.15.1-2.6.amzn1.noarch                                             15/20 
+  Verifying  : python26-2.6.9-2.89.amzn1.x86_64                                                      16/20 
+  Verifying  : python-crypto2.6-2.6.1-2.el6.x86_64                                                   17/20 
+  Verifying  : python26-libs-2.6.9-2.89.amzn1.x86_64                                                 18/20 
+  Verifying  : python-jinja2-26-2.6-3.el6.noarch                                                     19/20 
+  Verifying  : python26-pyasn1-0.1.7-2.9.amzn1.noarch                                                20/20 
+
+Installed:
+  ansible.noarch 0:2.5.5-1.el6                                                                             
+
+Dependency Installed:
+  python-crypto2.6.x86_64 0:2.6.1-2.el6                                                                    
+  python-jinja2-26.noarch 0:2.6-3.el6                                                                      
+  python-keyczar.noarch 0:0.71c-1.el6                                                                      
+  python26.x86_64 0:2.6.9-2.89.amzn1                                                                       
+  python26-PyYAML.x86_64 0:3.10-3.10.amzn1                                                                 
+  python26-babel.noarch 0:0.9.4-5.1.8.amzn1                                                                
+  python26-backports.x86_64 0:1.0-3.14.amzn1                                                               
+  python26-backports-ssl_match_hostname.noarch 0:3.4.0.2-1.12.amzn1                                        
+  python26-crypto.x86_64 0:2.6.1-1.15.amzn1                                                                
+  python26-ecdsa.noarch 0:0.11-3.3.amzn1                                                                   
+  python26-httplib2.noarch 0:0.7.7-1.5.amzn1                                                               
+  python26-libs.x86_64 0:2.6.9-2.89.amzn1                                                                  
+  python26-markupsafe.x86_64 0:0.11-4.6.amzn1                                                              
+  python26-paramiko.noarch 0:1.15.1-2.6.amzn1                                                              
+  python26-pyasn1.noarch 0:0.1.7-2.9.amzn1                                                                 
+  python26-setuptools.noarch 0:36.2.7-1.33.amzn1                                                           
+  python26-simplejson.x86_64 0:3.6.5-1.12.amzn1                                                            
+  python26-six.noarch 0:1.8.0-1.23.amzn1                                                                   
+  sshpass.x86_64 0:1.06-1.el6                                                                              
+
+Complete!
+student05:~/environment $ which ansible
+/usr/bin/ansible
+student05:~/environment $ which ansible-playbook
+/usr/bin/ansible-playbook
+student05:~/environment $ sudo cp -R ~/.kube/ /var/lib/jenkins/
+student05:~/environment $ sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
+student05:~/environment $ which aws
+/usr/bin/aws
+student05:~/environment $ sudo pip install boto boto3 botocore
+Requirement already satisfied: boto in /usr/lib/python2.7/dist-packages
+Collecting boto3
+  Downloading https://files.pythonhosted.org/packages/29/ad/b7775a16329acfbf6eecf0198c05caa8a067c518fd84728b3aaad60446ea/boto3-1.7.65-py2.py3-none-any.whl (128kB)
+    100% |████████████████████████████████| 133kB 5.0MB/s 
+Requirement already satisfied: botocore in /usr/lib/python2.7/dist-packages
+Collecting s3transfer<0.2.0,>=0.1.10 (from boto3)
+  Downloading https://files.pythonhosted.org/packages/d7/14/2a0004d487464d120c9fb85313a75cd3d71a7506955be458eebfe19a6b1d/s3transfer-0.1.13-py2.py3-none-any.whl (59kB)
+    100% |████████████████████████████████| 61kB 7.8MB/s 
+Requirement already satisfied: jmespath<1.0.0,>=0.7.1 in /usr/lib/python2.7/dist-packages (from boto3)
+Requirement already satisfied: python-dateutil<3.0.0,>=2.1 in /usr/lib/python2.7/dist-packages (from botocore)
+Requirement already satisfied: docutils>=0.10 in /usr/lib/python2.7/dist-packages (from botocore)
+Requirement already satisfied: futures<4.0.0,>=2.2.0; python_version == "2.6" or python_version == "2.7" in /usr/lib/python2.7/dist-packages (from s3transfer<0.2.0,>=0.1.10->boto3)
+Requirement already satisfied: six in /usr/local/lib/python2.7/site-packages (from python-dateutil<3.0.0,>=2.1->botocore)
+Installing collected packages: s3transfer, boto3
+Successfully installed boto3-1.7.65 s3transfer-0.1.13
+You are using pip version 9.0.3, however version 18.0 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+student05:~/environment $ history
+    1  git
+    2  git clone 
+    3  git clone https://github.com/chiya07/webtest.git
+    4  ls -la
+    5  cd webtest
+    6  ls -la
+    7  git status
+    8  git add *
+    9  git status
+   10  git commit -m "test commit"
+   11  git log
+   12  git diff
+   13  git diff 933d67c58f6cafaa2a996f7a67cd17e288bfdf94
+   14  git diff *
+   15  git push
+   16  git branch -v
+   17  cd ..
+   18  git branch -v
+   19  cd webtest/
+   20  git branch test
+   21  git branch
+   22  git branch -v
+   23  git checkout test
+   24  git branch -v
+   25  git add *
+   26  git commit
+   27  git commit -m "commiting from test branch"
+   28  git log
+   29  git branch -v
+   30  git branch master
+   31  git branch -s master
+   32  git checkout master
+   33  git merge test
+   34  git branch -v
+   35   git checkout test
+   36  git add *
+   37  git commit -m "committing to test branch"
+   38  git log
+   39  git branch -v
+   40  git checkout master
+   41  git add *
+   42  git commit -m "comitting to master"
+   43  git merge test
+   44  git diff
+   45  git branch -v
+   46  git log
+   47  git add *
+   48  git commit -m "sample three way merge"
+   49  git branch -v
+   50  git remote -v
+   51  git push
+   52  git add *
+   53  git commit -m "This is local master commit"
+   54  git push
+   55  git pull
+   56  cd webtest/
+   57  git add *
+   58  git commit -m "merged local with remote"
+   59  git push
+   60  git pull
+   61  git branch
+   62  history
+   63  g
+   64  git add *
+   65  git commit -m "added lab related files"
+   66  git push
+   67  git pull origin testing
+   68  git branch -v
+   69  git branch -v --all
+   70  git push --set-upstream origin testing
+   71  git push -u testing
+   72  git push -u origin/testing
+   73  history
+   74  git branch --set-upstream origin master:testing
+   75  git push --set-upstream origin master:testing
+   76  cd webtest/
+   77  git push --set-upstream origin master:testing
+   78  git branch --set-upstream origin master:testing
+   79  git pull
+   80  git branch -v
+   81  git branch -v -all
+   82  git branch -v --all
+   83  sudo yum -y install java-1.8.0-openjdk.x86_64
+   84  java -version
+   85  wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   86  sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   87  sudo rpm –import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   88  sudo rpm –import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   89  sudo yu, remove java-1.7.0
+   90  sudo yum remove java-1.7.0
+   91  java -version
+   92  sudo rpm –-import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   93  sudo rpm –-import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   94  sudo rpm --import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   95  sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   96  sudo yum install jenkins
+   97  sudo systemctl start jenkins
+   98  sudo service jenkins start
+   99  sudo chkconfig jenkins on
+  100  cd Git\ LAB\ Output/
+  101  git mv *.txt Day-1/*
+  102  git add Day-1/*
+  103  git mv *.txt Day-1/
+  104  git mv *.txt Day-1
+  105  git mv *.txt Day-1/*
+  106  git mv *.txt Day-1/
+  107  sudo git mv *.txt Day-1/
+  108  cd Day-1/
+  109  touch temp.txt
+  110  cd ..
+  111  git add Day-1
+  112  git mv *.txt Day-1/
+  113  git add *
+  114  git commit -m "adding all files"
+  115  git push
+  116  git branch -v
+  117  git push --set-upstream origin master:master
+  118  git pull
+  119  git push --set-upstream origin master:master
+  120  git pull --set-upstream origin master:master
+  121  git pull --all
+  122  git push --set-upstream origin master:master
+  123  git push --set-upstream origin master:testing
+  124  git pull
+  125  git push --set-upstream origin master:master
+  126  git status
+  127  git push --set-upstream origin master:testing
+  128  git mv *.txt Day-1/
+  129  git add *
+  130  git commit -m "moved day wise"
+  131  git push --set-upstream master:testing
+  132  git push --set-upstream origin master:testing
+  133  git branch --set-upstream origin master:master
+  134  git branch --track origin master:master
+  135  git branch --set-upstream origin master:master
+  136  git fetch master
+  137  git fetch master:master
+  138  git fetch origin master
+  139  git pull origin master:master
+  140  git status
+  141  git add *
+  142  git commit -m "added day-2 labs"
+  143  git pull origin master:master
+  144  git push origin master:master
+  145  git push origin master:testing
+  146  git branch =v
+  147  git branch -v
+  148  git rm branch =v
+  149  git branch rm =v
+  150  git branch -v
+  151  git branch -v --all
+  152  cat /var/lib/jenkins/secrets/initialAdminPassword
+  153  sudo /var/lib/jenkins/secrets/initialAdminPassword.
+  154  sudo /var/lib/jenkins/secrets/initialAdminPassword
+  155  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  156  ps -ef|grep jenkins
+  157  which git
+  158  which bash
+  159  which ssh
+  160  sudo vi /var/lib/jenkins/config.xml 
+  161  lsa
+  162  ls
+  163  cd ..
+  164  ssh -i "s2-myKey.pem" ec2-user@ec2-18-204-37-110.compute-1.amazonaws.com
+  165  git add *
+  166  git commit -m "this is jenkins test"
+  167  git pull origin master:testing
+  168  git push origin master:testing
+  169  git pull origin master:testing
+  170  git fetch origin master:testing
+  171  git pull origin testing
+  172  git status
+  173  git push origin master:testing
+  174  git add *
+  175  git commit -m "2nd jenkins test"
+  176  git push origin master:testing
+  177  mvn
+  178  wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+  179  tar -zxvf apache-maven-3.5.4-bin.tar.gz
+  180  sudo mv apache-maven-3.5.4 /usr/local/bin/
+  181  ls -ltr /usr/local/bin/
+  182  mvn
+  183  /usr/local/bin/apache-maven-3.5.4/bin/mvn
+  184  sudo yum -y install java-1.8.0-openjdk-devel
+  185  javac
+  186  history
+  187  history
+  188  ls
+  189  chmod 600 privateKey.pem 
+  190  ssh -i privateKey.pem ec2-user@ec2-18-208-130-150.compute-1.amazonaws.com
+  191  ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+  192  ssh -i privateKey.pem ec2-user@ec2-18-208-130-150.compute-1.amazonaws.com
+  193  ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+  194  exit
+  195  docker
+  196  sudo yum -y install docker
+  197  docker --version
+  198  id -a
+  199  sudo usermod -a -G docker ec2-user
+  200  exit
+  201  id -a
+  202  sudo service docker start
+  203  sudo chkconfig docker on
+  204  sudo service docker status
+  205  history
+  206  docker ps
+  207  pwd
+  208  docker info
+  209  cat /etc/docker/dsd
+  210  sudo ls -la /etc/docker/
+  211  mkdir code
+  212  echo "<h1> This is test docker </h1>" > code/index.html
+  213  docker run -d --name my-apache-app -p 8000:80 -v /home/ec2-user/environment/code:/usr/local/apache2/htdocs/ httpd:2.4
+  214  docker inspect my-apache-app
+  215  docker exec -it my-apache-app /bin/bash
+  216  cd MyApp/frontend/
+  217  docker build -t myapache:1.0 .
+  218  docker images
+  219  docker ps
+  220  docker stop c045c6aa3146
+  221  cd ../../
+  222  cd MyUbuntu/
+  223  ls
+  224  docker build =t myubuntu .
+  225  docker build -t myubuntu .
+  226  docker build =t myubuntu .
+  227  docker build -t myubuntu .
+  228  docker run -p 8000:8080 myubuntu
+  229  docker build -t myubuntu .
+  230  docker run -p 80:8000 myubuntu
+  231  docker ps
+  232  docker run -d -p 80:8000 myubuntu
+  233  docker exec nginx
+  234  RUN apt-get install -y php
+  235  RUN apt-get install -y php-gd
+  236  docker exec -it /bin/bash 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  237  docker exec -it bash 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  238  docker exec -it /usr/bin/bash 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  239  docker exec -it ls /bin 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  240  docker build -t myubuntu .
+  241  docker run -d -p 80:8000 myubuntu
+  242  docker stop 
+  243  docker stop ae2e98f44f6e77dcfdc305c2210488fc84a94724207e828696028653afba8ccf
+  244  docker stop 491618f4025b9e67eb783067e011d151c7a263f3987a9cf3b1ba87751e8c7b07
+  245  docker ps
+  246  docker stop 201f39b34dd6
+  247  docker run -d -p 80:8000 myubuntu
+  248  docker run -it ls myubuntu 
+  249  docker run -it  myubuntu ls
+  250  docker run -it  myubuntu bash
+  251  docker build -t myubuntu .
+  252  docker run -d -p 80:8000 myubuntu
+  253  docker ps
+  254  docker stop 615d83d094c7
+  255  docker run -d -p 80:8000 myubuntu
+  256  docker run -it  myubuntu bash
+  257  docker ps
+  258  docker stop 85cf2773c033
+  259  docker build -t myubuntu .
+  260  docker run -d -p 80:8000 myubuntu
+  261  docker run -it  myubuntu bash
+  262  docker run -it 4558aae3c210d1b6dba0ba2a56502d011b5c7c77f8793b2a0b41bbc1a5dd577f bash
+  263  docker exec -it 4558aae3c210d1b6dba0ba2a56502d011b5c7c77f8793b2a0b41bbc1a5dd577f bash
+  264  docker build -t myubuntu .
+  265  docker run -d -p 80:8000 myubuntu
+  266  docker ps
+  267  docker stop 4558aae3c210
+  268  docker rmi -f myubuntu
+  269  docker ps -a
+  270  docker rm 21f70bd54436 cb2fc8d58d94 336741c40322 e0c6c8765e2d 964a575caba9 4bfc9ccefa37 f88abe217481 a1e55b39dd88 
+  271  docker logs myubuntu
+  272  docker images
+  273  docker build -t myubuntu .
+  274  docker run -d -p 80:8000 myubuntu
+  275  docker logs myubuntu
+  276  docker logs bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440ad6
+  277  docker rm bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  278  docker stop bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  279  docker rm bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  280  docker logs bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  281  docker inspect bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  282  docker ps
+  283  docker ps -a
+  284  docker inspect bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  285  docker ps
+  286  docker rmi *
+  287  docker rmi -a
+  288  docker rmi
+  289  docker rmi --help
+  290  docker rmi -f myubuntu
+  291  docker images
+  292  docker rmi 94ce44e6f897 a32350b8d92b 0e12d994950c eb298e0cee09 5c8f9ac6c925 56236532b028 a56f4b232a68 4c7494c08a2b 9f978cdd208a cbeb3a495ddd
+  293  docker rmi -f 94ce44e6f897 a32350b8d92b 0e12d994950c eb298e0cee09 5c8f9ac6c925 56236532b028 a56f4b232a68 4c7494c08a2b 9f978cdd208a cbeb3a495ddd
+  294  docker images
+  295  docker rmi e2305af9f148 4b995bf74860 
+  296  docker build -t myubuntu .
+  297  docker images
+  298  docker run -d -p 80:8000 --name=myubuntu myubuntu
+  299  docker ps
+  300  docker logs myubuntu
+  301  docker exec -it myubuntu bash
+  302  curl http://localhost:8000
+  303  curl http://localhost:80
+  304  docker stop myubuntu
+  305  docker rm myubuntu
+  306  docker run -d -p 8000:80 myubuntu
+  307  docker tag myubuntu chiya07/cont/myubuntu
+  308  docker push chiya07/cont/myubuntu
+  309  docker login
+  310  docker push chiya07/cont/myubuntu
+  311  docker tag myubuntu chiya07/test/myubuntu
+  312  docker push chiya07/test/myubuntu
+  313  docker images
+  314  docker push chiya07/test/myubuntu
+  315  docker login
+  316  docker push chiya07/test/myubuntu
+  317  docker push chiya07/test/myubuntu:latest
+  318  docker tag myubuntu chiya07/test
+  319  docker push chiya07/test:latest
+  320  wget -O kops https://github.com/kubernetes/kops/releases/download/1.7.0/kops-linux-amd64
+  321  kops
+  322  chmod +x ./kops
+  323  sudo mv ./kops /usr/local/bin/
+  324  kops
+  325  wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+  326  chmod +x ./kubectl
+  327  wget -O kops https://github.com/kubernetes/kops/releases/download/1.8.1/kops-linux-amd64
+  328  chmod +x ./kops
+  329  sudo mv ./kops /usr/local/bin/
+  330  chmod +x ./kubectl
+  331  sudo mv ./kubectl /usr/local/bin/kubectl
+  332  aws configure
+  333  dig ns mohanraz.ml
+  334  dig ns chi007.ga
+  335  history
+  336  exit
+  337  git add *
+  338  cd webtest/
+  339  git add *
+  340  git commit -m "added day-4 lab"
+  341  docker pull origin master:testing
+  342  docker pull origin master/testing
+  343  docker pull origin
+  344  git pull origin master:testing
+  345  git push origin master:testing
+  346  git fetch origin master:testing
+  347  git pull origin master:testing
+  348  git push origin master:testing
+  349  git status
+  350  git push
+  351  git push origin HEAD:testing
+  352  git pull origin HEAD:testing
+  353  git push origin HEAD:testing
+  354  git push origin testing
+  355  digns chi007.ga
+  356  dig ns chi007.ga
+  357  cd webtest/
+  358  git pull origin
+  359  git push origin
+  360  git push origin HEAD:testing
+  361  git pull origin
+  362  git add *
+  363  git status
+  364  git commit -m "adding new files"
+  365  git push origin HEAD:testing
+  366  aws s3api create-bucket --bucket kube-chi007-ga-state-store  --region us-east-1
+  367  aws s3api put-bucket-versioning --bucket kube-chi007-ga-state-store  --versioning-configuration Status=Enabled
+  368  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --node-count=4     --node-size=t2.small     --master-size=t2.small \
+  369  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-node-count=2
+  370      --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  371  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2
+  372      --node-count=4     --node-size=t2.small     --master-size=t2.small \
+  373  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2     --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  374  sudo vi $HOME/.bash_profile
+  375  ssh-keygen
+  376  ls
+  377  ls -a
+  378  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2     --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  379  history
+  380  exit
+  381  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2     --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  382  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=3     --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  383  kops edit cluster ${NAME}
+  384  kops update cluster ${NAME} --yes
+  385  kops validate cluster
+  386  kubectl
+  387  kubectl version
+  388  wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/1.8.13/bin/linux/amd64/kubectl
+  389  wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/v1.8.13/bin/linux/amd64/kubectl
+  390  kubectl status
+  391  kubectl get nodes
+  392  kubectl version
+  393  chmod +x ./kubectl
+  394  sudo mv ./kubectl /usr/local/bin/kubectl
+  395  kubectl version
+  396  kubectl get nodes
+  397  cat ~/.kube/config 
+  398  kubectl get nodes
+  399  kubectl config view
+  400  kubectl get namespace
+  401  kubectl get pods --namespace=kube-system
+  402  kubectl get pods --namespace=default
+  403  kubectl get pods --namespace=kube-public
+  404  kubectl create namespace myns
+  405  kubectl describe myns
+  406  kubectl describe namespace myns
+  407  kubectl apply -f webtest/Git\ LAB\ Output/Day-5/Qutoas\ for\ Namespaces.yaml 
+  408  describe myns
+  409  kubectl describe myns
+  410  kubectl describe namespace myns
+  411  kubectl apply -f webtest/Git\ LAB\ Output/Day-5/Qutoas\ for\ Namespaces.yaml --namespace=myns
+  412  kubectl describe namespace myns
+  413  kubectl apply -f webtest/Git\ LAB\ Output/Day-5/webapp-dc.yaml --namespace=myns
+  414  kubectl describe all
+  415  kubectl describe all --namespace=myns
+  416  kubectl config set-context $(kubectl config current-context) --namespace=myns
+  417  kubectl desc all
+  418  kubectl describe all
+  419  kubectl get pods
+  420  kubectl get services
+  421  kubectl get deployments
+  422  kubectl get horizontalpodscaling
+  423  kubectl get horizontalpodautoscaling
+  424  kubectl get hpa
+  425  kubectl get replicationsets
+  426  kubectl get rs
+  427  kubectl apply -f webtest/Git\ LAB\ Output/Day-5/webapp-dc.yaml 
+  428  kubectl rs
+  429  kubectl get rs
+  430  kubectl get pods
+  431  kubestl scale
+  432  kubectl scale
+  433  kubectl scale deployment nginx-deployment-5689b44649
+  434  kubectl scale deployment nginx-deployment-5689b44649 --replicas=3
+  435  kubectl scale deployment  --replicas=3
+  436  kubectl get deployments
+  437  kubectl scale deployment nginx-deployment --replicas=3
+  438  kubectl get pods
+  439  kubectl describe deployment nginx-deployment
+  440  kubectl delete resource-quota nginx-deployment
+  441  kubectl delete resourcequota nginx
+  442  kubectl delete resourcequota nginx-deployment
+  443  kubectl delete resource-quota nginx-deployment
+  444  kubectl delete resource-quota nginx
+  445  kubectl delete resource-quota nginx --namespace myns
+  446  kubectl get resource-quota nginx --namespace myns
+  447  kubectl get resource-quota
+  448  kubectl get resourcequota
+  449  kubectl delete resourcequota myns
+  450  kubectl get pods
+  451  kubectl scale deployment nginx-deployment --replicas=4
+  452  kubectl get pods
+  453  kubectl get servicesw
+  454  kubectl get services
+  455  kubectl describe frontend
+  456  kubectl describe service frontend
+  457  kubectl delete deployment nginx
+  458  kubectl get deployments
+  459  kubectl delete deployment nginx-deployment
+  460  kubectl get services
+  461  kubectl delete service frontend
+  462  kubectl get all
+  463  sudo groups docker
+  464  sudo groups jenkins
+  465  sudo usermod -a -G docker jenkins
+  466  sudo service jenkins
+  467  sudo service jenkins restart
+  468  sudo yum -y install ansible
+  469  which ansible
+  470  which ansible-playbook
+  471  sudo cp -R ~/.kube/ /var/lib/jenkins/
+  472  sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
+  473  which aws
+  474  sudo pip install boto boto3 botocore
+  475  history

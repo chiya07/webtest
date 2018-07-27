@@ -1,0 +1,380 @@
+student05:~/environment/webtest (master) $ history
+    1  git
+    2  git clone 
+    3  git clone https://github.com/chiya07/webtest.git
+    4  ls -la
+    5  cd webtest
+    6  ls -la
+    7  git status
+    8  git add *
+    9  git status
+   10  git commit -m "test commit"
+   11  git log
+   12  git diff
+   13  git diff 933d67c58f6cafaa2a996f7a67cd17e288bfdf94
+   14  git diff *
+   15  git push
+   16  git branch -v
+   17  cd ..
+   18  git branch -v
+   19  cd webtest/
+   20  git branch test
+   21  git branch
+   22  git branch -v
+   23  git checkout test
+   24  git branch -v
+   25  git add *
+   26  git commit
+   27  git commit -m "commiting from test branch"
+   28  git log
+   29  git branch -v
+   30  git branch master
+   31  git branch -s master
+   32  git checkout master
+   33  git merge test
+   34  git branch -v
+   35   git checkout test
+   36  git add *
+   37  git commit -m "committing to test branch"
+   38  git log
+   39  git branch -v
+   40  git checkout master
+   41  git add *
+   42  git commit -m "comitting to master"
+   43  git merge test
+   44  git diff
+   45  git branch -v
+   46  git log
+   47  git add *
+   48  git commit -m "sample three way merge"
+   49  git branch -v
+   50  git remote -v
+   51  git push
+   52  git add *
+   53  git commit -m "This is local master commit"
+   54  git push
+   55  git pull
+   56  cd webtest/
+   57  git add *
+   58  git commit -m "merged local with remote"
+   59  git push
+   60  git pull
+   61  git branch
+   62  history
+   63  g
+   64  git add *
+   65  git commit -m "added lab related files"
+   66  git push
+   67  git pull origin testing
+   68  git branch -v
+   69  git branch -v --all
+   70  git push --set-upstream origin testing
+   71  git push -u testing
+   72  git push -u origin/testing
+   73  history
+   74  git branch --set-upstream origin master:testing
+   75  git push --set-upstream origin master:testing
+   76  cd webtest/
+   77  git push --set-upstream origin master:testing
+   78  git branch --set-upstream origin master:testing
+   79  git pull
+   80  git branch -v
+   81  git branch -v -all
+   82  git branch -v --all
+   83  sudo yum -y install java-1.8.0-openjdk.x86_64
+   84  java -version
+   85  wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   86  sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   87  sudo rpm –import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   88  sudo rpm –import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   89  sudo yu, remove java-1.7.0
+   90  sudo yum remove java-1.7.0
+   91  java -version
+   92  sudo rpm –-import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   93  sudo rpm –-import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   94  sudo rpm --import https://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   95  sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+   96  sudo yum install jenkins
+   97  sudo systemctl start jenkins
+   98  sudo service jenkins start
+   99  sudo chkconfig jenkins on
+  100  cd Git\ LAB\ Output/
+  101  git mv *.txt Day-1/*
+  102  git add Day-1/*
+  103  git mv *.txt Day-1/
+  104  git mv *.txt Day-1
+  105  git mv *.txt Day-1/*
+  106  git mv *.txt Day-1/
+  107  sudo git mv *.txt Day-1/
+  108  cd Day-1/
+  109  touch temp.txt
+  110  cd ..
+  111  git add Day-1
+  112  git mv *.txt Day-1/
+  113  git add *
+  114  git commit -m "adding all files"
+  115  git push
+  116  git branch -v
+  117  git push --set-upstream origin master:master
+  118  git pull
+  119  git push --set-upstream origin master:master
+  120  git pull --set-upstream origin master:master
+  121  git pull --all
+  122  git push --set-upstream origin master:master
+  123  git push --set-upstream origin master:testing
+  124  git pull
+  125  git push --set-upstream origin master:master
+  126  git status
+  127  git push --set-upstream origin master:testing
+  128  git mv *.txt Day-1/
+  129  git add *
+  130  git commit -m "moved day wise"
+  131  git push --set-upstream master:testing
+  132  git push --set-upstream origin master:testing
+  133  git branch --set-upstream origin master:master
+  134  git branch --track origin master:master
+  135  git branch --set-upstream origin master:master
+  136  git fetch master
+  137  git fetch master:master
+  138  git fetch origin master
+  139  git pull origin master:master
+  140  git status
+  141  git add *
+  142  git commit -m "added day-2 labs"
+  143  git pull origin master:master
+  144  git push origin master:master
+  145  git push origin master:testing
+  146  git branch =v
+  147  git branch -v
+  148  git rm branch =v
+  149  git branch rm =v
+  150  git branch -v
+  151  git branch -v --all
+  152  cat /var/lib/jenkins/secrets/initialAdminPassword
+  153  sudo /var/lib/jenkins/secrets/initialAdminPassword.
+  154  sudo /var/lib/jenkins/secrets/initialAdminPassword
+  155  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  156  ps -ef|grep jenkins
+  157  which git
+  158  which bash
+  159  which ssh
+  160  sudo vi /var/lib/jenkins/config.xml 
+  161  lsa
+  162  ls
+  163  cd ..
+  164  ssh -i "s2-myKey.pem" ec2-user@ec2-18-204-37-110.compute-1.amazonaws.com
+  165  git add *
+  166  git commit -m "this is jenkins test"
+  167  git pull origin master:testing
+  168  git push origin master:testing
+  169  git pull origin master:testing
+  170  git fetch origin master:testing
+  171  git pull origin testing
+  172  git status
+  173  git push origin master:testing
+  174  git add *
+  175  git commit -m "2nd jenkins test"
+  176  git push origin master:testing
+  177  mvn
+  178  wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+  179  tar -zxvf apache-maven-3.5.4-bin.tar.gz
+  180  sudo mv apache-maven-3.5.4 /usr/local/bin/
+  181  ls -ltr /usr/local/bin/
+  182  mvn
+  183  /usr/local/bin/apache-maven-3.5.4/bin/mvn
+  184  sudo yum -y install java-1.8.0-openjdk-devel
+  185  javac
+  186  history
+  187  history
+  188  ls
+  189  chmod 600 privateKey.pem 
+  190  ssh -i privateKey.pem ec2-user@ec2-18-208-130-150.compute-1.amazonaws.com
+  191  ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+  192  ssh -i privateKey.pem ec2-user@ec2-18-208-130-150.compute-1.amazonaws.com
+  193  ssh -i privateKey.pem ec2-user@ec2-54-209-250-59.compute-1.amazonaws.com
+  194  exit
+  195  docker
+  196  sudo yum -y install docker
+  197  docker --version
+  198  id -a
+  199  sudo usermod -a -G docker ec2-user
+  200  exit
+  201  id -a
+  202  sudo service docker start
+  203  sudo chkconfig docker on
+  204  sudo service docker status
+  205  history
+  206  docker ps
+  207  pwd
+  208  docker info
+  209  cat /etc/docker/dsd
+  210  sudo ls -la /etc/docker/
+  211  mkdir code
+  212  echo "<h1> This is test docker </h1>" > code/index.html
+  213  docker run -d --name my-apache-app -p 8000:80 -v /home/ec2-user/environment/code:/usr/local/apache2/htdocs/ httpd:2.4
+  214  docker inspect my-apache-app
+  215  docker exec -it my-apache-app /bin/bash
+  216  cd MyApp/frontend/
+  217  docker build -t myapache:1.0 .
+  218  docker images
+  219  docker ps
+  220  docker stop c045c6aa3146
+  221  cd ../../
+  222  cd MyUbuntu/
+  223  ls
+  224  docker build =t myubuntu .
+  225  docker build -t myubuntu .
+  226  docker build =t myubuntu .
+  227  docker build -t myubuntu .
+  228  docker run -p 8000:8080 myubuntu
+  229  docker build -t myubuntu .
+  230  docker run -p 80:8000 myubuntu
+  231  docker ps
+  232  docker run -d -p 80:8000 myubuntu
+  233  docker exec nginx
+  234  RUN apt-get install -y php
+  235  RUN apt-get install -y php-gd
+  236  docker exec -it /bin/bash 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  237  docker exec -it bash 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  238  docker exec -it /usr/bin/bash 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  239  docker exec -it ls /bin 201f39b34dd66b3be04f33add9b7162951f1b42a0a6500cad54d8c5455a3e161
+  240  docker build -t myubuntu .
+  241  docker run -d -p 80:8000 myubuntu
+  242  docker stop 
+  243  docker stop ae2e98f44f6e77dcfdc305c2210488fc84a94724207e828696028653afba8ccf
+  244  docker stop 491618f4025b9e67eb783067e011d151c7a263f3987a9cf3b1ba87751e8c7b07
+  245  docker ps
+  246  docker stop 201f39b34dd6
+  247  docker run -d -p 80:8000 myubuntu
+  248  docker run -it ls myubuntu 
+  249  docker run -it  myubuntu ls
+  250  docker run -it  myubuntu bash
+  251  docker build -t myubuntu .
+  252  docker run -d -p 80:8000 myubuntu
+  253  docker ps
+  254  docker stop 615d83d094c7
+  255  docker run -d -p 80:8000 myubuntu
+  256  docker run -it  myubuntu bash
+  257  docker ps
+  258  docker stop 85cf2773c033
+  259  docker build -t myubuntu .
+  260  docker run -d -p 80:8000 myubuntu
+  261  docker run -it  myubuntu bash
+  262  docker run -it 4558aae3c210d1b6dba0ba2a56502d011b5c7c77f8793b2a0b41bbc1a5dd577f bash
+  263  docker exec -it 4558aae3c210d1b6dba0ba2a56502d011b5c7c77f8793b2a0b41bbc1a5dd577f bash
+  264  docker build -t myubuntu .
+  265  docker run -d -p 80:8000 myubuntu
+  266  docker ps
+  267  docker stop 4558aae3c210
+  268  docker rmi -f myubuntu
+  269  docker ps -a
+  270  docker rm 21f70bd54436 cb2fc8d58d94 336741c40322 e0c6c8765e2d 964a575caba9 4bfc9ccefa37 f88abe217481 a1e55b39dd88 
+  271  docker logs myubuntu
+  272  docker images
+  273  docker build -t myubuntu .
+  274  docker run -d -p 80:8000 myubuntu
+  275  docker logs myubuntu
+  276  docker logs bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440ad6
+  277  docker rm bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  278  docker stop bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  279  docker rm bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  280  docker logs bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  281  docker inspect bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  282  docker ps
+  283  docker ps -a
+  284  docker inspect bdb1e33e3ed7a389b27a131d91e1dca2365f8f2bf782cfcbd0894a4110440a
+  285  docker ps
+  286  docker rmi *
+  287  docker rmi -a
+  288  docker rmi
+  289  docker rmi --help
+  290  docker rmi -f myubuntu
+  291  docker images
+  292  docker rmi 94ce44e6f897 a32350b8d92b 0e12d994950c eb298e0cee09 5c8f9ac6c925 56236532b028 a56f4b232a68 4c7494c08a2b 9f978cdd208a cbeb3a495ddd
+  293  docker rmi -f 94ce44e6f897 a32350b8d92b 0e12d994950c eb298e0cee09 5c8f9ac6c925 56236532b028 a56f4b232a68 4c7494c08a2b 9f978cdd208a cbeb3a495ddd
+  294  docker images
+  295  docker rmi e2305af9f148 4b995bf74860 
+  296  docker build -t myubuntu .
+  297  docker images
+  298  docker run -d -p 80:8000 --name=myubuntu myubuntu
+  299  docker ps
+  300  docker logs myubuntu
+  301  docker exec -it myubuntu bash
+  302  curl http://localhost:8000
+  303  curl http://localhost:80
+  304  docker stop myubuntu
+  305  docker rm myubuntu
+  306  docker run -d -p 8000:80 myubuntu
+  307  docker tag myubuntu chiya07/cont/myubuntu
+  308  docker push chiya07/cont/myubuntu
+  309  docker login
+  310  docker push chiya07/cont/myubuntu
+  311  docker tag myubuntu chiya07/test/myubuntu
+  312  docker push chiya07/test/myubuntu
+  313  docker images
+  314  docker push chiya07/test/myubuntu
+  315  docker login
+  316  docker push chiya07/test/myubuntu
+  317  docker push chiya07/test/myubuntu:latest
+  318  docker tag myubuntu chiya07/test
+  319  docker push chiya07/test:latest
+  320  wget -O kops https://github.com/kubernetes/kops/releases/download/1.7.0/kops-linux-amd64
+  321  kops
+  322  chmod +x ./kops
+  323  sudo mv ./kops /usr/local/bin/
+  324  kops
+  325  wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+  326  chmod +x ./kubectl
+  327  wget -O kops https://github.com/kubernetes/kops/releases/download/1.8.1/kops-linux-amd64
+  328  chmod +x ./kops
+  329  sudo mv ./kops /usr/local/bin/
+  330  chmod +x ./kubectl
+  331  sudo mv ./kubectl /usr/local/bin/kubectl
+  332  aws configure
+  333  dig ns mohanraz.ml
+  334  dig ns chi007.ga
+  335  history
+  336  exit
+  337  git add *
+  338  cd webtest/
+  339  git add *
+  340  git commit -m "added day-4 lab"
+  341  docker pull origin master:testing
+  342  docker pull origin master/testing
+  343  docker pull origin
+  344  git pull origin master:testing
+  345  git push origin master:testing
+  346  git fetch origin master:testing
+  347  git pull origin master:testing
+  348  git push origin master:testing
+  349  git status
+  350  git push
+  351  git push origin HEAD:testing
+  352  git pull origin HEAD:testing
+  353  git push origin HEAD:testing
+  354  git push origin testing
+  355  digns chi007.ga
+  356  dig ns chi007.ga
+  357  cd webtest/
+  358  git pull origin
+  359  git push origin
+  360  git push origin HEAD:testing
+  361  git pull origin
+  362  git add *
+  363  git status
+  364  git commit -m "adding new files"
+  365  git push origin HEAD:testing
+  366  aws s3api create-bucket --bucket kube-chi007-ga-state-store  --region us-east-1
+  367  aws s3api put-bucket-versioning --bucket kube-chi007-ga-state-store  --versioning-configuration Status=Enabled
+  368  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --node-count=4     --node-size=t2.small     --master-size=t2.small \
+  369  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-node-count=2
+  370      --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  371  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2
+  372      --node-count=4     --node-size=t2.small     --master-size=t2.small \
+  373  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2     --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  374  sudo vi $HOME/.bash_profile
+  375  ssh-keygen
+  376  ls
+  377  ls -a
+  378  kops create cluster     --zones=us-east-1a,us-east-1b,us-east-1c     --master-zones=us-east-1a,us-east-1b,us-east-1c     --master-count=2     --node-count=4     --node-size=t2.small     --master-size=t2.small     --name ${NAME}
+  379  history
